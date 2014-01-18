@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>HackPHX Team 2. We are hackatacious!</title>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/skynet.js"></script>
+    <script>
+
+      var skynetConfig = {
+        "uuid": "b1e0c6d0-2a08-11e3-87aa-471ff1c1c9a1",
+        "token": "cprhgtlf0jtc5wmi5l8u8paeudipmn29"
+      }    
+
+      var skynetSocket;
+
+      function setup() {
+        skynet(skynetConfig, function (e, socket) {
+          if (e) throw e
+
+          skynetSocket = socket;
+          if (skynetSocket != undefined)  {
+            $('#billyboard').show();  
+          }
+        })
+      }
+
+
+      function sendValueSet(valueSet) {
+        // console.log(valueSet);
+        if(skynetSocket == undefined) {
+          throw "skynetSocket undefined!"
+        }
+        console.log("sendValueSetsendValueSet: " + sendValueSet );
+        skynetSocket.emit('message', {
+          "devices": "a79bd891-7fdf-11e3-a399-f5b85b6b9fd0",
+          "message": valueSet }, function(data){
+          console.log("Repsonse: " + data);
+
+        }); 
+
+        skynetSocket.on('message', function(channel, message){
+          console.log('message received', channel, message);
+          $('#log').append("<p>"+ messsage.text + "</p>");
+        });
+
+      }
+
+
+      function processMessage(){
+        // sendMessage( $( "#message" ).val()) ;
+        sendValueSet( {"text" :  $( "#message" ).val() } ) ;
+      }
+
+
+
+
+
+      $( document ).ready(function() {
+        console.log( "ready!" );
+        $('#billyboard').hide();  
+        setup();
+        $("input:radio[name=led]").click(function() {
+          console.log("Set LED");
+          var bool = false;
+          if ( $(this).val() == "true" ) {
+            bool = true;
+          }
+
+          sendValueSet(  {"led": bool } );
+
+        });
+
+      });
+
+    </script>
+
+  </head>
+  <body>
+    <h1>HackPHX Team 2 is hacktacious</h1>
+    <h2> Skynet client-side app</h2>
+    <div>
+      <form id='#billyboard' action='' onsubmit="processMessage()">
+        <input type='text' id='message' size='100'><br>
+        <input  type='submit' id='heybilly' value='Hey!'><br>
+
+      </form>
+      <h2>Toggle the LED</h2>
+        <input type="radio" name="led" value="true" >On<br>
+        <input type="radio" name="led" value="false">Off<br>
+      </div>
+      <div id="log"></div>  
+    </body>
+  </html>
