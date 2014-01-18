@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/skynet.js"></script>
+    <script>
+
+      var skynetConfig = {
+        "uuid": "b1e0c6d0-2a08-11e3-87aa-471ff1c1c9a1",
+        "token": "cprhgtlf0jtc5wmi5l8u8paeudipmn29"
+      }    
+
+      var skynetSocket;
+
+      function setup() {
+        skynet(skynetConfig, function (e, socket) {
+          if (e) throw e
+          
+          skynetSocket = socket;
+
+        })
+      }
+
+      setup();
+
+      function sendMessage(msg) {
+        console.log(msg);
+        if(skynetSocket == undefined) {
+          throw "skynetSocket undefined!"
+
+        }
+        // Send and receive messages
+        skynetSocket.emit('message', {
+          "devices": "a79bd891-7fdf-11e3-a399-f5b85b6b9fd0",
+          "message": {
+            "text": msg
+          }}, function(data){
+          console.log("Repsonse: " + data);
+
+        }); 
+
+        skynetSocket.on('message', function(channel, message){
+          console.log('message received', channel, message);
+          $('#log').append("<p>"+ messsage.text + "</p>");
+        });
+
+
+      }
+
+
+      function processMessage(){
+        sendMessage( $( "#message" ).val()) ;
+      }
+
+
+    </script>
+
+  </head>
+  <body>
+    <h1> Skynet client-side app</h1>
+    <div id='billyboard'>
+      <form action='#' onsubmit="processMessage()">
+        <input type='text' id='message' size='100'><br>
+        <input  type='submit' id='heybilly' value='Hey!'>
+      </div>
+      <hr/>
+      <div id="log"></div>  
+    </body>
+  </html>
