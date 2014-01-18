@@ -74,7 +74,17 @@
       $( document ).ready(function() {
         console.log( "ready!" );
         $('#billyboard').hide();  
+
         setup();
+
+        $('#prefab').change(function() {
+        
+//          if ($(this).id > 0 ) {
+           $("#message").val($(this).val());
+  //         }
+        
+        } );
+    
         $("input:radio[name=led]").click(function() {
           console.log("Set LED");
           var bool = false;
@@ -117,14 +127,22 @@
     <div class="container">
       <div class="row">
         <div id='waiting'>
-          <p>Setting up ...</p>
+          <p>Establishing a connection with Skynet.  Please be patient ...</p>
           <img src='img/ajax-loader.gif'>
           </div>
         <div class="col-md-12">
           <h2>Send a message via Skynet</h2>
           <form id='billyboard' action='' onsubmit="processMessage()">
             <input type='text' id='message' size='30' class="form-control" placeholder='Pithy message ...'><br>
-            <input  type='submit' id='heybilly' value='Send it!' class="btn btn-default  btn-lg" role='button'><br>
+
+            <select id='prefab' class="form-control" >
+                            <option id='0' value='' >Prefab messages</option>
+              <option id='1' value='Eat dinner | 30' >Eat dinner | 30</option>
+              <option id='2' value='Feed cat | 90'>Feed cat | 90</option>
+              <option id='3' value='Sexy time | 120 '>Sexy time | 120 </option>
+              </select>
+              <br> 
+              <input  type='submit' id='heybilly' value='Send it!' class="btn btn-default  btn-lg" role='button'><br>
 
           <h2>Toggle the LED</h2>
           <form id='ledfields' action=''>
@@ -140,6 +158,7 @@
 
     <footer>
     <p>&copy; HackPHX Team 2 2014</p>
+    <p>Gaze lovingly upon the <a href='https://github.com/hackPHX-ArduinoWearables/Team02'>code</a></p>
     <p>Learn more about <a href='http://skynet.im'>Skynet</a></p>
     </footer>
   </div> <!-- /container -->
