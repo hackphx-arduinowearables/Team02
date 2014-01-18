@@ -14,7 +14,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/jumbotron.css" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -26,7 +26,13 @@
     <![endif]-->
 
 
+    <style>
 
+      #billyboard  {
+        visibilty: hidden;
+      }
+
+     </style>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/skynet.js"></script>
     <script>
@@ -45,19 +51,17 @@
           skynetSocket = socket;
           if (skynetSocket != undefined)  {
             $('#billyboard').show();  
+            $('#waiting').hide();  
           }
         })
       }
 
 
       function sendValueSet(valueSet) {
-        // console.log(valueSet);
         if(skynetSocket == undefined) {
           throw "skynetSocket undefined!"
         }
 
-        console.log("sendValueSetsendValueSet: " + sendValueSet );
-        
         skynetSocket.emit('message', {
           "devices": "a79bd891-7fdf-11e3-a399-f5b85b6b9fd0",
           "message": valueSet }, function(data){
@@ -66,7 +70,6 @@
 
         skynetSocket.on('message', function(channel, message){
           console.log('message received', channel, message);
-          $('#log').append("<p>"+ messsage.text + "</p>");
         });
 
       }
@@ -96,7 +99,7 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -108,39 +111,42 @@
           <a class="navbar-brand" href="#">HackPHX Team 2 is Hacktacious!</a>
         </div>
       </div>
-    </div>
+    </div -->
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Billyboard</h1>
+        <h1>HackPHX: Billyboard</h1>
         <p>Use this form to send messages to the Team 2 device</p>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
+        <div id='waiting'>
+          <p>Setting up ...</p>
+          </div>
         <div class="col-md-12">
           <h2>Send a message via Skynet</h2>
-          <form id='#billyboard' action='' onsubmit="processMessage()">
-            <input type='text' id='message' size='40'><br>
-            <input  type='submit' id='heybilly' value='Hey!' class="btn btn-default" role='button'><br>
+          <form id='billyboard' action='' onsubmit="processMessage()">
+            <input type='text' id='message' size='30' class="form-control" placeholder='Pithy message ...'><br>
+            <input  type='submit' id='heybilly' value='Send it!' class="btn btn-default  btn-lg" role='button'><br>
+
+          <h2>Toggle the LED</h2>
+          <form id='ledfields' action=''>
+          <input type="radio" name="led" value="true" >On<br>
+          <input type="radio" name="led" value="false">Off<br>
 
           </form>
 
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Toggle the LED</h2>
-          <input type="radio" name="led" value="true" >On<br>
-          <input type="radio" name="led" value="false">Off<br>
-        </div>
-        <div id="log"></div>          </div>
-      <hr>
+        <div id="log"></div>          
+        <hr>
 
     <footer>
     <p>&copy; HackPHX Team 2 2014</p>
+    <p>Learn more about <a href='http://skynet.im'>Skynet</a></p>
     </footer>
   </div> <!-- /container -->
 
@@ -148,8 +154,8 @@
   <!-- Bootstrap core JavaScript
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-  <script src="../../dist/js/bootstrap.min.js"></script>
+  <!-- script src="https://code.jquery.com/jquery-1.10.2.min.js"></script -->
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
 
