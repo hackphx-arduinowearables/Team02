@@ -1,5 +1,6 @@
 <html>
   <head>
+    <title>HackPHX Team 2. We are hackatacious!</title>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/skynet.js"></script>
     <script>
@@ -14,26 +15,24 @@
       function setup() {
         skynet(skynetConfig, function (e, socket) {
           if (e) throw e
-          
-          skynetSocket = socket;
 
+          skynetSocket = socket;
+          if (skynetSocket != undefined)  {
+            $('#billyboard').show();  
+          }
         })
       }
 
-      setup();
 
-      function sendMessage(msg) {
-        console.log(msg);
+      function sendValueSet(valueSet) {
+        // console.log(valueSet);
         if(skynetSocket == undefined) {
           throw "skynetSocket undefined!"
-
         }
-        // Send and receive messages
+        console.log("sendValueSetsendValueSet: " + sendValueSet );
         skynetSocket.emit('message', {
           "devices": "a79bd891-7fdf-11e3-a399-f5b85b6b9fd0",
-          "message": {
-            "text": msg
-          }}, function(data){
+          "message": valueSet }, function(data){
           console.log("Repsonse: " + data);
 
         }); 
@@ -43,26 +42,51 @@
           $('#log').append("<p>"+ messsage.text + "</p>");
         });
 
-
       }
 
 
       function processMessage(){
-        sendMessage( $( "#message" ).val()) ;
+        // sendMessage( $( "#message" ).val()) ;
+        sendValueSet( {"text" :  $( "#message" ).val() } ) ;
       }
 
+
+
+
+
+      $( document ).ready(function() {
+        console.log( "ready!" );
+        $('#billyboard').hide();  
+        setup();
+        $("input:radio[name=led]").click(function() {
+          console.log("Set LED");
+          var bool = false;
+          if ( $(this).val() == "true" ) {
+            bool = true;
+          }
+
+          sendValueSet(  {"led": bool } );
+
+        });
+
+      });
 
     </script>
 
   </head>
   <body>
-    <h1> Skynet client-side app</h1>
-    <div id='billyboard'>
-      <form action='#' onsubmit="processMessage()">
+    <h1>HackPHX Team 2 is hacktacious</h1>
+    <h2> Skynet client-side app</h2>
+    <div>
+      <form id='#billyboard' action='' onsubmit="processMessage()">
         <input type='text' id='message' size='100'><br>
-        <input  type='submit' id='heybilly' value='Hey!'>
+        <input  type='submit' id='heybilly' value='Hey!'><br>
+
+      </form>
+      <h2>Toggle the LED</h2>
+        <input type="radio" name="led" value="true" >On<br>
+        <input type="radio" name="led" value="false">Off<br>
       </div>
-      <hr/>
       <div id="log"></div>  
     </body>
   </html>

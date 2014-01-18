@@ -5,7 +5,7 @@ task 'upload' do
     #copy_from = __DIR__ + 'public'
     copy_from = 'public'
 
-    cmd = %~rsync  -rav -e "ssh -p17022  -ljames" #{copy_from}/ neurogami.com:/home/james/webdev/hack.tacio.us/public/ ~
+    cmd = %~rsync  -rav   --no-p --no-g --chmod=ugo=rwX -e "ssh -p17022  -ljames" #{copy_from}/ neurogami.com:/home/james/webdev/hack.tacio.us/public/ ~
     puts cmd
     sh cmd
   #end
