@@ -1,0 +1,37 @@
+<html>
+<head>
+  <script src="skynet.js"></script>
+  <script>
+    var skynetConfig = {
+      "uuid": "b1e0c6d0-2a08-11e3-87aa-471ff1c1c9a1",
+      "token": "cprhgtlf0jtc5wmi5l8u8paeudipmn29"
+    }    
+    skynet(skynetConfig, function (e, socket) {
+    // skynet(function (e, skynet) {
+    // skynet({appName:'chris'}, function (e, skynet) {
+      if (e) throw e
+
+      // Send and receive messages
+      socket.emit('message', {
+        "devices": "a79bd891-7fdf-11e3-a399-f5b85b6b9fd0",
+        "message": {
+        "text":"hackphx"
+      }}, function(data){
+        console.log(data);
+      }); 
+      socket.on('message', function(channel, message){
+        console.log('message received', channel, message);
+      });
+
+
+    });
+  </script>
+
+</head>
+<body>
+  Skynet client-side app
+  
+  <hr/>
+  <div id="log"></div>  
+</body>
+</html>
