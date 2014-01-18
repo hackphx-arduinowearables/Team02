@@ -1,12 +1,20 @@
 .navbar-inverse {
-background-color: #0E44E6;
+  background-color: #0E44E6;
 }
-
-
 
 .jumbotron {
-
-color: #fff;
-background-color: #3B00CF;
-background-color: #FF2003;
+  color: #fff;
+  background-color: #FF2003;
 }
+
+
+#waiting {
+  text-align: center;
+  color: #ccee00;
+  font-size: 200%;
+}
+
+#billyboard {
+  visibilty: hidden;
+}
+
