@@ -37,7 +37,16 @@
 
       var skynetSocket;
 
+      function sendingIndicator() {
+        $("#sending").show();
+    setTimeout(function() {
+    $("#sending").hide();
+}, 3000);
+        
+      }
+
       function setup() {
+                $("#sending").hide();
         skynet(skynetConfig, function (e, socket) {
           if (e) throw e
 
@@ -55,6 +64,7 @@
           throw "skynetSocket undefined!"
         }
 
+sendingIndicator();
         skynetSocket.emit('message', {
           "devices": "a79bd891-7fdf-11e3-a399-f5b85b6b9fd0",
           "message": valueSet }, function(data){
@@ -64,6 +74,7 @@
         skynetSocket.on('message', function(channel, message){
           console.log('message received', channel, message);
         });
+
 
       }
 
@@ -130,16 +141,19 @@
           <p>Establishing a connection with Skynet.  Please be patient ...</p>
           <img src='img/ajax-loader.gif'>
           </div>
+          <div id='sending'>
+            <img src='img/ajax-loader.gif'>
+            </div>
         <div class="col-md-12">
           <h2>Send a message via Skynet</h2>
           <form id='billyboard' action='' onsubmit="processMessage()">
-            <input type='text' id='message' size='30' class="form-control" placeholder='Pithy message ...'><br>
+            <input type='text' id='message' size='20' maxlen='14' class="form-control" placeholder='Pithy message ...'><br>
 
             <select id='prefab' class="form-control" >
                             <option id='0' value='' >Prefab messages</option>
               <option id='1' value='Eat dinner | 30' >Eat dinner | 30</option>
               <option id='2' value='Feed cat | 90'>Feed cat | 90</option>
-              <option id='3' value='Sexy time | 120 '>Sexy time | 120 </option>
+              <option id='3' value='Sexy time | 120'>Sexy time | 120 </option>
               </select>
               <br> 
               <input  type='submit' id='heybilly' value='Send it!' class="btn btn-default  btn-lg" role='button'><br>
@@ -159,6 +173,7 @@
     <footer>
     <p>&copy; HackPHX Team 2 2014</p>
     <p>Gaze lovingly upon the <a href='https://github.com/hackPHX-ArduinoWearables/Team02'>code</a></p>
+    <p>Watch a <a href='http://www.youtube.com/watch?v=IBNoSB_bac4'>video</a>
     <p>Learn more about <a href='http://skynet.im'>Skynet</a></p>
     </footer>
   </div> <!-- /container -->
