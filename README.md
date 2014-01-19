@@ -27,6 +27,28 @@ In addition to the OLED display the device uses vibration and LEDs to indicate m
 
 Our UnWatch also supports a convential time on the display using the Xadow RTC module.
 
+
+### Some Pix ###
+
+![Display](https://pbs.twimg.com/media/BeThQSNCcAAEfyj.jpg)
+
+
+![Raw Hardware](https://pbs.twimg.com/media/BeR6ZfvIUAAKs-_.jpg)
+
+![3/4 of the team](https://pbs.twimg.com/media/BeO6KyPCAAAvHiV.jpg)
+
+![FOOD!](https://pbs.twimg.com/media/BeS5_GyCAAAzG6g.jpg)
+
+### Video ###
+
+
+[Fun with NeoPixels at #hackphx #iot](https://vine.co/v/hl62qTdbnFh)
+
+
+[SMS to @skynetim powered wearable tech with @Tropo #hackphx #i](http://www.youtube.com/watch?v=7b0JJWoUjaQ&feature=youtu.be)
+
+[Our #hackphx BLE watch is now connected to @skynetim! #iot](http://www.youtube.com/watch?v=IBNoSB_bac4&list=UUBMdqdAbjJjE9LvMjVpiwUw&feature=c4-overview)
+
 ## Random notes
 
 We have Bluetooth LE which connects to SkyNet.im (an opensource machine-to-machine instant messaging platform).
