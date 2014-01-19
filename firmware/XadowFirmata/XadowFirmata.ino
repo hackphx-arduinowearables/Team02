@@ -727,15 +727,69 @@ unsigned char getTime(unsigned char *dta)
 
 void printTime(){
   unsigned char timeArray[7];
-  char message[32];
+  char message[16];
   getTime(timeArray);
   //whatTimeIsIt(message, timeArray);
   //SeeedOled.clearDisplay();
   SeeedOled.setTextXY(3,1);
   
   //SeeedOled.putString(message);
-  for(int i = 3; i < 7; i++) {
-    SeeedOled.putNumber(timeArray[i]);
-    SeeedOled.putChar(' ');
+  switch (timeArray[5]) {
+    case 4:
+      if (timeArray[6] < 30)
+        SeeedOled.putString("    Demo time   ");
+      else
+        SeeedOled.putString("     Sunrise    ");
+      SeeedOled.setTextXY(5,1);
+      switch ((timeArray[6]) % 30 / 2) {
+        case 0:
+          SeeedOled.putString("^              ");
+          break;
+        case 1:
+          SeeedOled.putString(" ^             ");
+          break;
+        case 2:
+          SeeedOled.putString("  ^            ");
+          break;
+        case 3:
+          SeeedOled.putString("   ^           ");
+          break;
+        case 4:
+          SeeedOled.putString("    ^          ");
+          break;
+        case 5:
+          SeeedOled.putString("     ^         ");
+          break;
+        case 6:
+          SeeedOled.putString("      ^        ");
+          break;
+        case 7:
+          SeeedOled.putString("       ^       ");
+          break;
+        case 8:
+          SeeedOled.putString("        ^      ");
+          break;
+        case 9:
+          SeeedOled.putString("         ^     ");
+          break;
+        case 10:
+          SeeedOled.putString("          ^    ");
+          break;
+        case 11:
+          SeeedOled.putString("           ^   ");
+          break;
+        case 12:
+          SeeedOled.putString("            ^  ");
+          break;
+        case 13:
+          SeeedOled.putString("             ^ ");
+          break;
+        default:
+          SeeedOled.putString("              ^");
+      }
+      break;
+    default:
+      SeeedOled.clearDisplay();
+      SeeedOled.putString("    Work Time     ");
   }
 }
