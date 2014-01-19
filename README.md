@@ -2,9 +2,19 @@
 
 Our HackPHX wearable technology project is called an UnWatch!
 
-The general idea is that you wear a device that relays information about relative time.
+Human beings experienced time long before there were accurate timekeeping devices, or even a numerical idea of time to tell.
 
-Time is conveyed in terms of relative distances between planned events.  
+For them, time was punctuated and organized in terms of the physical, social, and agricultural events they immediately experienced.
+
+If you asked a farmer what time it was, prior to the sixteenth century he might tell you "It's almost time to milk the cow," or "It's time to start harvesting"
+
+Even after accurate timekeeping was developed, most people lived on this "human time" until the synchronization of locomotive schedules and factory shifts necessitated accurate time.
+
+"Machine Time" as we like to call it, is a tool to bend human behavior to the convenience of industrial capitalism.
+
+Fuck Time^t^m is an Unwatch^T^M designed to liberate humans from machine time.
+
+It tells time based on your schedule, without hours, minutes, or days.
 
 For example, you eat breakfast at some given time, and plan on going for a walk at a later time.
 
