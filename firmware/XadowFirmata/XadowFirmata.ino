@@ -697,3 +697,45 @@ void stringCallback(char *myString)
   }
   
 }
+
+// RTC stuff
+#define ADDRRTC         0x68
+
+unsigned char bcdToDec(unsigned char val)
+{
+    return ( (val/16*10) + (val%16) );
+}
+
+unsigned char getTime(unsigned char *dta)
+{
+    // Reset the register pointer
+    Wire.beginTransmission(ADDRRTC);
+    Wire.write((unsigned char)0x00);
+    Wire.endTransmission();
+    Wire.requestFrom(ADDRRTC, 7);
+    // A few of these need masks because certain bits are control bits
+    dta[6]  = bcdToDec(Wire.read());
+    dta[5]  = bcdToDec(Wire.read());
+    dta[4]  = bcdToDec(Wire.read());        // Need to change this if 12 hour am/pm
+    dta[3]  = bcdToDec(Wire.read());
+    dta[2]  = bcdToDec(Wire.read());
+    dta[1]  = bcdToDec(Wire.read());
+    dta[0]  = bcdToDec(Wire.read());
+
+    return 1;
+}
+
+void printTime(){
+  unsigned char timeArray[7];
+  char message[32];
+  getTime(timeArray);
+  //whatTimeIsIt(message, timeArray);
+  //SeeedOled.clearDisplay();
+  SeeedOled.setTextXY(3,1);
+  
+  //SeeedOled.putString(message);
+  for(int i = 3; i < 7; i++) {
+    SeeedOled.putNumber(timeArray[i]);
+    SeeedOled.putChar(' ');
+  }
+}
