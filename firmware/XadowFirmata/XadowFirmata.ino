@@ -630,6 +630,9 @@ void setup()
   Serial1.begin(38400);
   Firmata.begin(Serial1);
   systemResetCallback();  // reset to default config
+  
+  unsigned char td[] = {14, 1, 18, 6, 20, 00, 00};  
+  setTime(td);   
 }
 
 /*==============================================================================
@@ -686,6 +689,7 @@ void stringCallback(char *myString)
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(0,0);          //Set the cursor to Xth Page, Yth Column  
   SeeedOled.putString(myString); //Print the String
+  SeeedOled.putString("         ");
 
   //compare strings here and call a function or something
   if (strcmp(myString, "setup") == 0)
@@ -700,6 +704,38 @@ void stringCallback(char *myString)
 
 // RTC stuff
 #define ADDRRTC         0x68
+
+#define MON 1
+#define TUE 2
+#define WED 3
+#define THU 4
+#define FRI 5
+#define SAT 6
+#define SUN 7
+
+unsigned char decToBcd(unsigned char val)
+{
+    return ( (val/10*16) + (val%10) );
+}
+
+unsigned char setTime(unsigned char *dta)
+{
+
+    Wire.beginTransmission(ADDRRTC);
+    Wire.write((unsigned char)0x00);
+    Wire.write(decToBcd(dta[6]));           // 0 to bit 7 starts the clock
+    Wire.write(decToBcd(dta[5]));
+    Wire.write(decToBcd(dta[4]));           // If you want 12 hour am/pm you need to set bit 6
+    Wire.write(decToBcd(dta[3]));
+    Wire.write(decToBcd(dta[2]));
+    Wire.write(decToBcd(dta[1]));
+    Wire.write(decToBcd(dta[0]));
+    Wire.endTransmission();
+
+    return 1;
+}
+
+
 
 unsigned char bcdToDec(unsigned char val)
 {
@@ -735,13 +771,25 @@ void printTime(){
   
   //SeeedOled.putString(message);
   switch (timeArray[5]) {
-    case 4:
+    case 0:
       if (timeArray[6] < 30)
-        SeeedOled.putString("    Demo time   ");
+        SeeedOled.putString(" Demo time   ");
       else
-        SeeedOled.putString("     Sunrise    ");
-      SeeedOled.setTextXY(5,1);
-      switch ((timeArray[6]) % 30 / 2) {
+        SeeedOled.putString("  Sunrise    ");
+      SeeedOled.setTextXY(6,1);
+      printProgress(timeArray[7] / 4);
+      break;
+    default:
+      SeeedOled.setTextXY(3,1);
+      SeeedOled.putString("                ");
+      SeeedOled.setTextXY(3,1);
+      SeeedOled.putString("  Work Time     ");
+      printProgress(timeArray[6]);
+  }
+}
+void printProgress(unsigned char timer){
+      SeeedOled.setTextXY(6,1);
+      switch (timer) {
         case 0:
           SeeedOled.putString("^              ");
           break;
@@ -787,9 +835,4 @@ void printTime(){
         default:
           SeeedOled.putString("              ^");
       }
-      break;
-    default:
-      SeeedOled.clearDisplay();
-      SeeedOled.putString("    Work Time     ");
-  }
 }
