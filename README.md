@@ -19,7 +19,7 @@ So, when you look at our "UnWatch" you will not think "I have 25 minutes until I
 
 You set schedule items by sending messages over [Skynet](http://skynet.im), an Internet of Things communication tool.
 
-You can do this using a Web interface (http://hack.tacio.us) or by sending SMS text messages.
+You can do this using a Web interface [http://hack.tacio.us](http://hack.tacio.us) or by sending SMS text messages.
 
 Skynet can also be used to send instant messages or notifications to the device.
 
