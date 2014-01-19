@@ -30,14 +30,27 @@ Our UnWatch also supports a convential time on the display using the Xadow RTC m
 
 ### Some Pix ###
 
+The display 
+
 ![Display](https://pbs.twimg.com/media/BeThQSNCcAAEfyj.jpg)
 
+The group
+
+![Group](https://pbs.twimg.com/media/BeRZBDnCEAAENKN.jpg)
+
+Prescott with device
+
+![Prescott](https://pbs.twimg.com/media/BeRkzOVCMAA7q4p.jpg)
+
+Raw hardware
 
 ![Raw Hardware](https://pbs.twimg.com/media/BeR6ZfvIUAAKs-_.jpg)
 
+3/4 of the team
+
 ![3/4 of the team](https://pbs.twimg.com/media/BeO6KyPCAAAvHiV.jpg)
 
-![FOOD!](https://pbs.twimg.com/media/BeS5_GyCAAAzG6g.jpg)
+
 
 ### Video ###
 
