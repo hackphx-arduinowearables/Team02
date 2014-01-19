@@ -1,4 +1,4 @@
-#  Epic Team 2 is Epic 
+#  Fuck Time: the Unwatch
 
 Our HackPHX wearable technology project is called an UnWatch!
 
@@ -12,7 +12,7 @@ Even after accurate timekeeping was developed, most people lived on this "human 
 
 "Machine Time" as we like to call it, is a tool to bend human behavior to the convenience of industrial capitalism.
 
-Fuck Time^t^m is an Unwatch^T^M designed to liberate humans from machine time.
+Fuck Time™ is an Unwatch™ designed to liberate humans from machine time.
 
 It tells time based on your schedule, without hours, minutes, or days.
 
