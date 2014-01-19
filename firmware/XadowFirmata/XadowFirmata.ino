@@ -665,11 +665,14 @@ void loop()
       }
     }
     // report i2c data for all device with read continuous mode enabled
-    if (queryIndex > -1) {
-      for (byte i = 0; i < queryIndex + 1; i++) {
-        readAndReportData(query[i].addr, query[i].reg, query[i].bytes);
-      }
-    }
+
+    //enableI2CPins();
+    //SeeedOled.putNumber(currentMillis);
+    Serial.println(currentMillis);
+    enableI2CPins();
+    //SeeedOled.clearDisplay();
+    printTime();
+    //disableI2CPins();
   }
   
 
